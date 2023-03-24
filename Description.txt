@@ -1,0 +1,75 @@
+Repository/Directory Synchronizer
+
+This is all about comparing and syncing two directories and files(repositories)
+
+    When Two files have same name then they are considered as same.
+
+    But when two files have same content and metadata but different names, thenthey are considered as different files.
+
+
+    Instance attributes(used within the code):
+        :d1, d2:  root directories' names --> stirng
+        :left_files, left_dirs:  lists of names of files and subdirectories which are in directory *d1* --> list
+        :right_files, right_dirs:  lists of names of files and subdirectories which are in directory *d2* --> list
+        :only_left_files, only_left_dirs: file and subdirectory names which are in *left_files*, *left_dirs* but not in *right_files*, *right_dirs* --> list
+        :only_right_files, only_right_dirs: file and subdirectory names which are in *right_files*, *right_dirs* but not in *left_files*, *left_dirs* --> list
+        :comm_files, comm_dirs:  file and subdirectory names that are in both *left_files* and *right_files* --> list
+        :funnies:  list of tuples of full file names that are in both *left_files* and *right_files*.
+                   But these files have different contents or metadata in different root directories --> list
+                   i.e.
+                       [(file1_of_d1, file1_of_d2), (file2_of_d1, file2_of_d2), ....]
+        :funnies_stats:  stats for the files in funnies --> dictionary
+                         i.e.
+                             {
+                             file1_name: {
+                                             *d1*: {
+                                             'size': file1_of_d1_size_in_MB, 'last mod': file1_of_d1_lastModifiedDate_in_localTime, 'stat obj': os.stat_of_file1_of_d1
+                                             }
+                                             *d2*: {
+                                             'size': file1_of_d2_size_in_MB, 'last mod': file1_of_d2_lastModifiedDate_in_localTime, 'stat obj': os.stat_of_file1_of_d2
+                                             }
+                                         }
+                             file2_name: {
+                                             *d1*: {
+                                             'size': file2_of_d1_size_in_MB, 'last mod': file2_of_d1_lastModifiedDate_in_localTime, 'stat obj': os.stat_of_file2_of_d1
+                                             }
+                                             *d2*: {
+                                             'size': file2_of_d2_size_in_MB, 'last mod': file2_of_d2_lastModifiedDate_in_localTime, 'stat obj': os.stat_of_file2_of_d2
+                                             }
+                                         }
+                                ....
+                             }
+        :funnies_report:  a report and coparison on the files of *funnies* based on *funnies_stats* --> string
+
+    Instance methods:
+        sync_left(self, avoid_files = None, avoid_dirs = None):
+            Copies files from directory *d2* to *d1* that are in *only_righ_files* and *only_right_dirs*
+            If *avoid_file* and *avoid_dirs* are given then these files and subdirectories are skipped while copying
+            *avoid_files* and *avoid_dirs* should be lists or tuples
+            
+            Returns nothing
+        sync_right(self, avoid_files = None, avoid_dirs = None):
+            Copies files from directory *d1* to *d2* that are in *only_left_files* and *only_left_dirs*
+            If *avoid_file* and *avoid_dirs* are given then these files and subdirectories are skipped while copying
+            *avoid_files* and *avoid_dirs* should be lists or tuples
+            
+            Returns nothing
+            
+        sync(self, avoid_files = None, avoid_dirs = None):
+            Copies files from directory *d1* to *d2* and vice versa
+            If *avoid_files* and *avoid_dirs* are given then these files and subdirectories are skipped while copying
+            *avoid_files* and *avoid_dirs* should be lists or tuples
+            
+            Returns nothing
+    
+    Notes: 
+        1: No aoutomatic action are taken on the 'funny' file while syncing
+           However, actions can be taken on these files with the _sync method.
+           See _sync.__doc__
+        
+        2. os.walk hase been used to gather the file and subdiretory names.
+        
+        3. filecmp.cmp (shallow = True) has been used to compare to files with same name.
+        
+        4. shuitl.copy2 has been used to copy files from one directory to another for syncing.
+           os.mkdir has been used to create subdirectories
