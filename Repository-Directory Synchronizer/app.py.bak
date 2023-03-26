@@ -1,0 +1,17 @@
+from flask import Flask, render_template
+from sync import sync_folders
+from flask import request, jsonify
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+
+@app.route('/sync', methods=['POST'])
+def sync():
+    local_folder = request.form['local-folder']
+    remote_folder = request.form['remote-folder']
+    result = sync_folders(local_folder, remote_folder)
+    return jsonify({'result': result})
