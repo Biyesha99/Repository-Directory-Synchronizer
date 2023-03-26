@@ -1,0 +1,21 @@
+.container{
+	 width:50%;
+	 margin:auto;
+	 text-align:center;
+}
+
+h1{
+	 font-size:36px;
+	 margin-top:50px;
+}
+
+form{
+	margin-top:50px;
+	text-align:left;
+}
+
+label{
+	font-size:24px;
+	display:block;
+}
+	 
