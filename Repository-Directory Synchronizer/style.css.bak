@@ -5,18 +5,29 @@
 }
 
 h1{
+<<<<<<< Updated upstream
 	 font-size:36px;
 	 margin-top:50px;
+=======
+	 font-size:40px;
+	 margin-top:50px;
+	 font-family: "Copperplate";
+>>>>>>> Stashed changes
 }
 
 form{
 	margin-top:50px;
 	text-align:left;
+<<<<<<< Updated upstream
+=======
+	font-family: "Fantasy", "Courier New", "Cursive";
+>>>>>>> Stashed changes
 }
 
 label{
 	font-size:24px;
 	display:block;
+<<<<<<< Updated upstream
 }
 input [type ="text"]{
 	width: 100%;
@@ -42,3 +53,36 @@ button[type = "submit"]{
 button[type = "submit"]:hover{
 	background-color: #45a049;
 }
+=======
+	font-family: "Lucida Console", "Courier New", "Cursive";
+}
+body {
+  background-image: url("OIP.jfif");
+  background-repeat: repeat-x;
+}
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: "Lucida Console", "Courier New", "Cursive";
+  font-size:25px;
+}
+
+input[type=submit]: {
+  background-color: #45a049;
+>>>>>>> Stashed changes
