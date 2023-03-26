@@ -14,7 +14,7 @@
 			   <input type = "text" id = "local-folder" name = "local-folder"><br /><br />
 			   <label for = "remote-folder">Remote Folder: </label>
 			   <input type = "text" id = "remote-folder" name = "remote-folder"><br /><br />
-			   <input type = "submit" value="Sync">
+			   <input type = "submit">Sync</input>
 			</form>
 		</div>
    </body>
